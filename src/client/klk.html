@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discos</title>
+</head>
+
+<body>
+    <div>
+        <h2>consulta de discos</h2>
+        <p>podes consultar los discos por titulo,año de lanzamiento o artista</p>
+
+        <input type="text" name="title" id="title" placeholder="titulo">
+        <input type="text" name="artist" id="artist" placeholder="artista">
+        <input type="text" name="release" id="release" placeholder="lanzamiento">
+        <button id="req-button">consultar</button>
+
+        <script>
+            //ajax
+            const button = document.getElementById('req-button');
+            button.addEventListener('click', function () {
+                console.log('hola mundo soy el evento click');
+
+            });
+        </script>
+    </div>
+</body>
+
+</html>
