@@ -1,0 +1,23 @@
+{
+  "name": "consulta-discos",
+  "version": "1.0.0",
+  "description": "app para poder consultar los discos por título, año o artista",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llanesgabrielg/consulta-discos.git"
+  },
+  "author": "gabriel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llanesgabrielg/consulta-discos/issues"
+  },
+  "homepage": "https://github.com/llanesgabrielg/consulta-discos#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -17,13 +17,55 @@
         <input type="text" name="artist" id="artist" placeholder="artista">
         <input type="text" name="release" id="release" placeholder="lanzamiento">
         <button id="req-button">consultar</button>
+        <div id="box-main">
+
+        </div>
 
         <script>
-            //ajax
             const button = document.getElementById('req-button');
-            button.addEventListener('click', function () {
-                console.log('hola mundo soy el evento click');
+            const inputTitle = document.getElementById('title');
+            const inputArtist = document.getElementById('artist');
+            const inputRelease = document.getElementById('release');
+            // console.log(inputTitle.value);
+            //
+            // const refImg = document.getElementById('box-disk_img');
+            // const refData = document.getElementsByClassName('box-disk_data');
 
+            const refBoxMain = document.getElementById('box-main');
+            //AJAX
+            button.addEventListener('click', function () {
+                //enviar un request utilizando AJAX con el objeto xmlhttprequest propio del navegador 
+                const xhr = new XMLHttpRequest();
+                refBoxMain.innerHTML = ""; //para limpiar por cada click   
+                xhr.addEventListener('load', function () {
+                    const objResponse = JSON.parse(xhr.responseText); // convierto json a obj
+                    // console.log(objResponse[0].artista);
+
+                    for (let index = 0; index < objResponse.length; index++) {
+                        const disk = objResponse[index]; // tengo un objeto de la lista
+                        // creo html 
+                        const boxDisk = document.createElement("div");
+                        const title = document.createElement("h3");
+                        const artist = document.createElement("h2");
+                        const release = document.createElement("p");
+                        const top = document.createElement("img");
+
+                        title.textContent = "titulo: " + disk.titulo;
+                        artist.innerHTML = "artista: " + disk.artista;//otra forma de insertar contenido
+                        release.textContent = "año: " + disk.lanzamiento;
+                        top.src = disk.tapa;
+
+                        boxDisk.appendChild(artist);
+                        boxDisk.appendChild(title);
+                        boxDisk.appendChild(release);
+                        boxDisk.appendChild(top);
+
+                        refBoxMain.appendChild(boxDisk);
+                    }
+                });
+                //datos que envio al servidor para ser procesados
+                xhr.open('get', `/disco?title=${inputTitle.value}&artist=${inputArtist.value}&release=${inputRelease.value}`);
+                xhr.send();
             });
         </script>
     </div>
