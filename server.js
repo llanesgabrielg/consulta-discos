@@ -4,19 +4,19 @@ const app = express();
 
 const PORT = 3000;
 //tengo un JSON
-let disks = require("./discos.json");
+let disks = require("./src/discos.json");
 //convierto a string y luego a objeto
 let strDisks = JSON.stringify(disks);
 let parseDisks = JSON.parse(strDisks);
 const vecDisks = parseDisks.discos;
 
 //middleware
-app.use(express.static(path.join(__dirname, "client")));
+app.use(express.static(path.join(__dirname, "/src/client")));
 
 //endpoints - routes
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "client/klk.html"));
+  res.sendFile(path.join(__dirname, "/src/client/index.html"));
 });
 
 app.get("/disco", function (req, res) {

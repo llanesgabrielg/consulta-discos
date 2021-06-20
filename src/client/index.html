@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Discos</title>
 </head>
 
@@ -26,10 +27,6 @@
             const inputTitle = document.getElementById('title');
             const inputArtist = document.getElementById('artist');
             const inputRelease = document.getElementById('release');
-            // console.log(inputTitle.value);
-            //
-            // const refImg = document.getElementById('box-disk_img');
-            // const refData = document.getElementsByClassName('box-disk_data');
 
             const refBoxMain = document.getElementById('box-main');
             //AJAX
@@ -40,7 +37,6 @@
                 xhr.addEventListener('load', function () {
                     const objResponse = JSON.parse(xhr.responseText); // convierto json a obj
                     // console.log(objResponse[0].artista);
-
                     for (let index = 0; index < objResponse.length; index++) {
                         const disk = objResponse[index]; // tengo un objeto de la lista
                         // creo html 
@@ -49,6 +45,12 @@
                         const artist = document.createElement("h2");
                         const release = document.createElement("p");
                         const top = document.createElement("img");
+                        //agregar classes
+                        boxDisk.classList.add('box-deep');
+                        title.classList.add('box-deep--text');
+                        artist.classList.add('box-deep--text');
+                        release.classList.add('box-deep--text');
+                        top.classList.add('box-deep--img');
 
                         title.textContent = "titulo: " + disk.titulo;
                         artist.innerHTML = "artista: " + disk.artista;//otra forma de insertar contenido
@@ -64,9 +66,21 @@
                     }
                 });
                 //datos que envio al servidor para ser procesados
-                xhr.open('get', `/disco?title=${inputTitle.value}&artist=${inputArtist.value}&release=${inputRelease.value}`);
+                let cadena = "";
+                // ?title=${inputTitle.value}&artist=${inputArtist.value}&release=${inputRelease.value} hago esto para no enviar campos vacios
+                if (inputTitle.value) {
+                    cadena = (cadena === "" ? cadena="?" : (cadena == "?" ? "": "&")) + "title=" + inputTitle.value;
+                }
+                if (inputArtist.value) {
+                    cadena = (cadena === "" ? cadena="?" : (cadena == "?" ? "": "&")) + "artist=" + inputArtist.value;
+                }
+                if (inputRelease.value) {
+                    cadena = (cadena === "" ? cadena="?" : (cadena == "?" ? "": "&")) + "artist=" + inputRelease.value;
+                }
+                xhr.open('get', '/disco'+cadena);
+                // xhr.open('get', `/disco?title=${inputTitle.value}&artist=${inputArtist.value}&release=${inputRelease.value}`); hago lo mismo 
                 xhr.send();
-            });
+         });;
         </script>
     </div>
 </body>
